@@ -3,9 +3,9 @@
 {% block content %}
     <h1>Upload File</h1>
     <form action="" method="post" enctype="multipart/form-data">
-        {{ form.hidden_tag() }}
-        {{ form.file.label }} {{ form.file() }}
-        {{ form.is_public.label }} {{ form.is_public() }}
-        {{ form.submit() }}
+        {{ upload_form.hidden_tag() }}
+        {{ upload_form.file.label }} {{ upload_form.file() }}
+        {{ upload_form.is_public.label }} {{ upload_form.is_public() }}
+        {{ upload_form.submit() }}
     </form>
 {% endblock %}

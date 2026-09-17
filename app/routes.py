@@ -8,7 +8,7 @@ from app.forms import LoginForm, UploadForm
 from app.models import User, File
 
 @app.route('/')
-@app.route('/index')
+@app.route('/index', methods=['GET', 'POST'])
 @login_required
 def index():
     private_folder = os.path.join(app.config['UPLOAD_FOLDER'], 'private', str(current_user.id))
@@ -24,8 +24,35 @@ def index():
     public_folder = os.path.join(app.config['UPLOAD_FOLDER'], 'public')
     for (root, dirs, filenames) in os.walk(public_folder):
         for filename in filenames:
-            public_files.append(os.path.relpath(os.path.join(root, filename), public_folder))
-    return render_template('index.html', title='Home', user=current_user, user_id=current_user.id, files=files, public_files=public_files)
+            relative_path = os.path.relpath(os.path.join(root, filename), public_folder)
+            file_name = os.path.basename(relative_path)
+            owner_id = int(relative_path.split(os.sep, 1)[0])
+            owner = db.session.get(User, owner_id)
+            public_files.append({'path': relative_path, 'name': file_name, 'owner': owner})
+    
+    if request.method == 'POST':
+        form = UploadForm()
+        if form.validate_on_submit():
+            uploaded_file = request.files['file']
+            if uploaded_file.filename != '':
+                filename = secure_filename(uploaded_file.filename)
+                if form.is_public.data:
+                    file_path = os.path.join(app.config['UPLOAD_FOLDER'], 'public', str(current_user.id), filename)
+                    if not os.path.exists(os.path.dirname(file_path)):
+                        os.makedirs(os.path.dirname(file_path))
+                else:
+                    file_path = os.path.join(app.config['UPLOAD_FOLDER'], 'private', str(current_user.id), filename)
+                    if not os.path.exists(os.path.dirname(file_path)):
+                        os.makedirs(os.path.dirname(file_path))
+                uploaded_file.save(file_path)
+                flash('File successfully uploaded')
+                return redirect(url_for('index'))
+            else:
+                flash('No selected file')
+                return redirect(request.url)
+    upload_form = UploadForm()
+
+    return render_template('index.html', title='Home', user=current_user, user_id=current_user.id, files=files, public_files=public_files, upload_form=upload_form)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
