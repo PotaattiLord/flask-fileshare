@@ -9,4 +9,5 @@ class Config:
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
         'sqlite:///' + os.path.join(basedir, 'app.db')
 
+    LANGUAGES = ['en', 'fi']
     USER_CREATION_SECRET = os.environ.get('USER_CREATION_SECRET') or 'a-secret-key-for-user-creation'

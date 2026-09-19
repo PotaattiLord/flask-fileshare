@@ -5,21 +5,22 @@ from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 import sqlalchemy as sa
 from app import db
 from app.models import User
+from flask_babel import _, lazy_gettext as _l
 
 class LoginForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    remember_me = BooleanField('Remember Me')
-    submit = SubmitField('Sign In')
+    username = StringField(_l('Username'), validators=[DataRequired()])
+    password = PasswordField(_l('Password'), validators=[DataRequired()])
+    remember_me = BooleanField(_l('Remember Me'))
+    submit = SubmitField(_l('Sign In'))
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired()])
+    username = StringField(_l('Username'), validators=[DataRequired()])
+    email = StringField(_l('Email'), validators=[DataRequired(), Email()])
+    password = PasswordField(_l('Password'), validators=[DataRequired()])
     password2 = PasswordField(
-        'Repeat Password', validators=[DataRequired(), EqualTo('password')])
-    secret_key = StringField('Secret Key', validators=[DataRequired()])
-    submit = SubmitField('Register')
+        _l('Repeat Password'), validators=[DataRequired(), EqualTo('password')])
+    secret_key = StringField(_l('Secret Key'), validators=[DataRequired()])
+    submit = SubmitField(_l('Register'))
 
     def validate_username(self, username):
         user = db.session.scalar(sa.select(User).where(
@@ -39,6 +40,6 @@ class RegistrationForm(FlaskForm):
             raise ValidationError('Invalid secret key. Please contact the administrator for access.')
 
 class UploadForm(FlaskForm):
-    file = FileField('File', validators=[DataRequired()])
-    is_public = BooleanField('Public')
-    submit = SubmitField('Upload')
+    file = FileField(_l('File'), validators=[DataRequired()])
+    is_public = BooleanField(_l('Public'))
+    submit = SubmitField(_l('Upload'))

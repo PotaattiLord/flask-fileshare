@@ -1,0 +1,160 @@
+# Translations template for PROJECT.
+# Copyright (C) 2026 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-09-19 19:11+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: app/__init__.py:33
+msgid "Please log in to access this page."
+msgstr ""
+
+#: app/auth/forms.py:10 app/auth/forms.py:16
+msgid "Username"
+msgstr ""
+
+#: app/auth/forms.py:11 app/auth/forms.py:18
+msgid "Password"
+msgstr ""
+
+#: app/auth/forms.py:12
+msgid "Remember Me"
+msgstr ""
+
+#: app/auth/forms.py:13
+msgid "Sign In"
+msgstr ""
+
+#: app/auth/forms.py:17
+msgid "Email"
+msgstr ""
+
+#: app/auth/forms.py:20
+msgid "Repeat Password"
+msgstr ""
+
+#: app/auth/forms.py:21
+msgid "Secret Key"
+msgstr ""
+
+#: app/auth/forms.py:22 app/templates/auth/register.html:4
+msgid "Register"
+msgstr ""
+
+#: app/auth/forms.py:42
+msgid "File"
+msgstr ""
+
+#: app/auth/forms.py:43
+msgid "Public"
+msgstr ""
+
+#: app/auth/forms.py:44 app/templates/base.html:18
+msgid "Upload"
+msgstr ""
+
+#: app/auth/routes.py:48 app/auth/routes.py:109
+msgid "File successfully uploaded"
+msgstr ""
+
+#: app/auth/routes.py:51 app/auth/routes.py:112
+msgid "No selected file"
+msgstr ""
+
+#: app/auth/routes.py:66
+msgid "Invalid username or password"
+msgstr ""
+
+#: app/auth/routes.py:82
+msgid "Congratulations, you are now a registered user!"
+msgstr ""
+
+#: app/auth/routes.py:142
+msgid "File successfully deleted"
+msgstr ""
+
+#: app/auth/routes.py:144
+msgid "File not found"
+msgstr ""
+
+#: app/templates/auth/login.html:4 app/templates/base.html:15
+msgid "Login"
+msgstr ""
+
+#: app/templates/base.html:17
+msgid "Home"
+msgstr ""
+
+#: app/templates/base.html:19
+msgid "Logout"
+msgstr ""
+
+#: app/templates/index.html:4
+msgid "Files"
+msgstr ""
+
+#: app/templates/index.html:7
+msgid "Filter Files"
+msgstr ""
+
+#: app/templates/index.html:9
+msgid "Filter by name:"
+msgstr ""
+
+#: app/templates/index.html:13
+msgid "Filter by type:"
+msgstr ""
+
+#: app/templates/index.html:26 app/templates/index.html:48
+msgid "Private Files"
+msgstr ""
+
+#: app/templates/index.html:30 app/templates/index.html:69
+msgid "Public Files"
+msgstr ""
+
+#: app/templates/index.html:33
+msgid "Download selected files"
+msgstr ""
+
+#: app/templates/index.html:37
+msgid "Upload File"
+msgstr ""
+
+#: app/templates/index.html:56 app/templates/index.html:78
+msgid "Download"
+msgstr ""
+
+#: app/templates/index.html:58 app/templates/index.html:61
+#: app/templates/index.html:80 app/templates/index.html:83
+msgid "Delete"
+msgstr ""
+
+#: app/templates/index.html:59 app/templates/index.html:81
+msgid "View"
+msgstr ""
+
+#: app/templates/auth/login.html:24
+msgid "Don't have an account?"
+msgstr ""
+
+#: app/templates/auth/login.html:24
+msgid "Register here"
+msgstr ""
+
+#: app/templates/auth/login.html:24
+msgid "You'll need a secret key to register."
+msgstr ""
+

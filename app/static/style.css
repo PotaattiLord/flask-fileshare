@@ -56,6 +56,11 @@ body {
     align-items: center;
     gap: 5px;
 }
+.file-item-name a {
+    text-decoration: none;
+    border: none;
+    color: var(--text-color);
+}
 .file-item {
     border: 1px solid #ccc;
     padding: 0 0 0 5px;

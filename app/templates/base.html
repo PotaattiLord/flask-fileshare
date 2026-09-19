@@ -12,11 +12,11 @@
         <div class="top-bar">
             <h1 id="logo">Tieto</h1>
             {% if current_user.is_anonymous %}
-            <a href="{{ url_for('login') }}">Login</a>
+            <a href="{{ url_for('login') }}">{{ _('Login') }}</a>
             {% else %}
-            <a href="{{ url_for('index') }}">Home</a>
-            <a href="{{ url_for('upload') }}">Upload</a>
-            <a href="{{ url_for('logout') }}">Logout</a>
+            <a href="{{ url_for('index') }}">{{ _('Home') }}</a>
+            <a href="{{ url_for('upload') }}">{{ _('Upload') }}</a>
+            <a href="{{ url_for('logout') }}">{{ _('Logout') }}</a>
             {% endif %}
             <button id="theme-toggle" onclick="ChangeTheme()">Toggle Theme</button>
             {% if current_user.is_authenticated %}
