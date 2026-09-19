@@ -48,7 +48,7 @@ def index():
                         os.makedirs(os.path.dirname(file_path))
                 uploaded_file.save(file_path)
                 flash(_('File successfully uploaded'))
-                return redirect(url_for('index'))
+                return redirect(url_for('auth.index'))
             else:
                 flash(_('No selected file'))
                 return redirect(request.url)
@@ -109,7 +109,7 @@ def upload():
                         os.makedirs(os.path.dirname(file_path))
                 uploaded_file.save(file_path)
                 flash(_('File successfully uploaded'))
-                return redirect(url_for('index'))
+                return redirect(url_for('auth.index'))
             else:
                 flash(_('No selected file'))
                 return redirect(request.url)
