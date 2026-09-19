@@ -50,15 +50,15 @@
             <div class="file-item">
                 <div class="file-item-name">
                     <input type="checkbox" class="file-checkbox" data-filename="{{ file }}">
-                    <a href="{{ url_for('private_file', filename=file, user_id=current_user.id) }}">{{ file }}</a>
+                    <a href="{{ url_for('auth.private_file', filename=file, user_id=current_user.id) }}">{{ file }}</a>
                 </div>
                 <div class="file-actions">
-                    <a href="{{ url_for('private_file', filename=file, user_id=current_user.id) }}" download>{{ _('Download') }}</a>
+                    <a href="{{ url_for('auth.private_file', filename=file, user_id=current_user.id) }}" download>{{ _('Download') }}</a>
                     {% if file.endswith('.png') or file.endswith('.jpg') or file.endswith('.jpeg') or file.endswith('.gif') or file.endswith('.webp') or file.endswith('.svg') %}
-                    <a href="{{ url_for('delete_file', filename=file, user_id=current_user.id, access='private') }}" onclick="return confirm('Are you sure you want to delete this file?');">{{ _('Delete') }}</a>
-                    <a href="{{ url_for('private_file', filename=file, user_id=current_user.id) }}" class="file-item-link-corner">{{ _('View') }}</a>
+                    <a href="{{ url_for('auth.delete_file', filename=file, user_id=current_user.id, access='private') }}" onclick="return confirm('Are you sure you want to delete this file?');">{{ _('Delete') }}</a>
+                    <a href="{{ url_for('auth.private_file', filename=file, user_id=current_user.id) }}" class="file-item-link-corner">{{ _('View') }}</a>
                     {% else %}
-                    <a href="{{ url_for('delete_file', filename=file, user_id=current_user.id, access='private') }}" class="file-item-link-corner" onclick="return confirm('Are you sure you want to delete this file?');">{{ _('Delete') }}</a>
+                    <a href="{{ url_for('auth.delete_file', filename=file, user_id=current_user.id, access='private') }}" class="file-item-link-corner" onclick="return confirm('Are you sure you want to delete this file?');">{{ _('Delete') }}</a>
                     {% endif %}
                 </div>
             </div>
@@ -71,16 +71,16 @@
             <div class="file-item">
                 <div class="file-item-name">
                     <input type="checkbox" class="file-checkbox" data-filename="{{ file.name }}">
-                    <a href="{{ url_for('public_file', filename=file.path) }}" style="color: green;">{{ file.name }}</a>
+                    <a href="{{ url_for('auth.public_file', filename=file.path) }}" style="color: green;">{{ file.name }}</a>
                     <p id="file-owner-{{ file.path }}">Owner: {{ file.owner.username }}</p>
                 </div>
                 <div class="file-actions">
-                    <a href="{{ url_for('public_file', filename=file.path) }}" download>{{ _('Download') }}</a>
+                    <a href="{{ url_for('auth.public_file', filename=file.path) }}" download>{{ _('Download') }}</a>
                     {% if file.path.endswith('.png') or file.path.endswith('.jpg') or file.path.endswith('.jpeg') or file.path.endswith('.gif') or file.path.endswith('.webp') or file.path.endswith('.svg') %}
-                    <a href="{{ url_for('delete_file', filename=file.path, user_id=current_user.id, access='public') }}" onclick="return confirm('Are you sure you want to delete this file?');">{{ _('Delete') }}</a>
-                    <a href="{{ url_for('public_file', filename=file.path) }}" class="file-item-link-corner">{{ _('View') }}</a>
+                    <a href="{{ url_for('auth.delete_file', filename=file.path, user_id=current_user.id, access='public') }}" onclick="return confirm('Are you sure you want to delete this file?');">{{ _('Delete') }}</a>
+                    <a href="{{ url_for('auth.public_file', filename=file.path) }}" class="file-item-link-corner">{{ _('View') }}</a>
                     {% else %}
-                    <a href="{{ url_for('delete_file', filename=file.path, user_id=current_user.id, access='public') }}" class="file-item-link-corner" onclick="return confirm('Are you sure you want to delete this file?');">{{ _('Delete') }}</a>
+                    <a href="{{ url_for('auth.delete_file', filename=file.path, user_id=current_user.id, access='public') }}" class="file-item-link-corner" onclick="return confirm('Are you sure you want to delete this file?');">{{ _('Delete') }}</a>
                     {% endif %}
                 </div>
             </div>
