@@ -16,7 +16,8 @@ babel = Babel(app, locale_selector=get_locale)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login = LoginManager(app)
-login.login_view = 'login'
+login.login_view = 'auth.login'
+login.login_message = _l('Please log in to access this page.')
 
 from app.errors import bp as errors_bp
 app.register_blueprint(errors_bp)
@@ -26,13 +27,6 @@ app.register_blueprint(auth_bp, url_prefix='/auth')
 
 from app import models
 
-db = SQLAlchemy()
-migrate = Migrate()
-login = LoginManager()
-login.login_view = 'auth.login'
-login.login_message = _l('Please log in to access this page.')
-babel = Babel()
-
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
@@ -41,6 +35,12 @@ def create_app(config_class=Config):
     migrate.init_app(app, db)
     login.init_app(app)
     babel.init_app(app)
+
+    from app.errors import bp as errors_bp
+    app.register_blueprint(errors_bp)
+
+    from app.auth import bp as auth_bp
+    app.register_blueprint(auth_bp, url_prefix='/auth')
 
     from app.cli import bp as cli_bp
     app.register_blueprint(cli_bp)
