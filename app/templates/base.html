@@ -9,7 +9,7 @@
       <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     </head>
     <body>
-        <div class="top-bar">
+        <header class="top-bar">
             <h1 id="logo">Tieto</h1>
             {% if current_user.is_anonymous %}
             <a href="{{ url_for('auth.login') }}">{{ _('Login') }}</a>
@@ -22,7 +22,7 @@
             {% if current_user.is_authenticated %}
             <p>Logged in as {{ current_user.username }}</p>
             {% endif %}
-        </div>
+        </header>
         <div class="content">
             {% with messages = get_flashed_messages() %}
             {% if messages %}
