@@ -1,18 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>{{ _('Files') }}</h1>
     <div class="sidebar">
         <div class="file-filtering">
             <h2>{{ _('Filter Files') }}</h2>
             <div class="file-filtering-options">
                 <label for="fileNameFilter">{{ _('Filter by name:') }}</label>
-                <input type="text" id="fileNameFilter" placeholder="Enter file name">
+                <input type="text" id="fileNameFilter" placeholder="{{ _('Enter file name') }}">
             </div>
             <div class="file-filtering-options">
                 <label for="fileTypeFilter">{{ _('Filter by type:') }}</label>
                 <select id="fileTypeFilter">
-                    <option value="">All</option>
+                    <option value="">{{ _('All') }}</option>
                     <option value=".txt">.txt</option>
                     <option value=".pdf">.pdf</option>
                     <option value=".jpg">.jpg</option>
@@ -43,14 +42,14 @@
             </form>
         </div>
     </div>
-    <div class="files">
+    <div id="files" class="files">
         <div class="file-list private-files">
             <h3>{{ _('Private Files') }}</h3>
             {% for file in files %}
             <div class="file-item">
                 <div class="file-item-name">
                     <input type="checkbox" class="file-checkbox" data-filename="{{ file }}">
-                    <a href="{{ url_for('auth.private_file', filename=file, user_id=current_user.id) }}">{{ file }}</a>
+                    <button type="button" data-file-url="{{ url_for('auth.private_file', filename=file, user_id=current_user.id) }}" onclick="showFileViewer(this.getAttribute('data-file-url'))">{{ file }}</button>
                 </div>
                 <div class="file-actions">
                     <a href="{{ url_for('auth.private_file', filename=file, user_id=current_user.id) }}" download>{{ _('Download') }}</a>
@@ -71,7 +70,7 @@
             <div class="file-item">
                 <div class="file-item-name">
                     <input type="checkbox" class="file-checkbox" data-filename="{{ file.name }}">
-                    <a href="{{ url_for('auth.public_file', filename=file.path) }}" style="color: green;">{{ file.name }}</a>
+                    <button type="button" data-file-url="{{ url_for('auth.public_file', filename=file.path) }}" onclick="showFileViewer(this.getAttribute('data-file-url'))">{{ file.name }}</button>
                     <p id="file-owner-{{ file.path }}">Owner: {{ file.owner.username }}</p>
                 </div>
                 <div class="file-actions">

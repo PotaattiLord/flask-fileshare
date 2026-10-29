@@ -1,6 +1,15 @@
-FROM python:3.9-slim
-WORKDIR /app
-COPY requirements.txt .
+FROM python:slim
+
+COPY requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
-COPY . .
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "flask-fileshare:app"]
+
+COPY app app
+COPY migrations migrations
+COPY flask-fileshare.py config.py boot.sh ./
+RUN chmod a+x boot.sh
+
+ENV FLASK_APP flask-fileshare.py
+RUN flask translate compile
+
+EXPOSE 5000
+ENTRYPOINT ["./boot.sh"]

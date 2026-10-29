@@ -10,8 +10,7 @@ class User(db.Model, UserMixin):
     username: so.Mapped[str] = so.mapped_column(sa.String(64), index=True, unique=True)
     email: so.Mapped[str] = so.mapped_column(sa.String(120), index=True, unique=True)
     password_hash: so.Mapped[Optional[str]] = so.mapped_column(sa.String(256))
-
-    files: so.WriteOnlyMapped[list["File"]] = so.relationship("File", back_populates="user")
+    encrypted_key: so.Mapped[Optional[str]] = so.mapped_column(sa.String(512))
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -21,18 +20,6 @@ class User(db.Model, UserMixin):
 
     def __repr__(self) -> str:
         return f'<User {self.username}>'
-
-class File(db.Model):
-    id: so.Mapped[int] = so.mapped_column(primary_key=True)
-    filename: so.Mapped[str] = so.mapped_column(sa.String(256), index=True)
-    path: so.Mapped[str] = so.mapped_column(sa.String(512), unique=True)
-    description: so.Mapped[Optional[str]] = so.mapped_column(sa.String(512))
-    user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(User.id), index=True)
-
-    user: so.Mapped[User] = so.relationship("User", back_populates="files")
-
-    def __repr__(self) -> str:
-        return f'<File {self.filename}>'
 
 @login.user_loader
 def load_user(id):

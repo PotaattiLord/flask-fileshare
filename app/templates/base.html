@@ -15,7 +15,6 @@
             <a href="{{ url_for('auth.login') }}">{{ _('Login') }}</a>
             {% else %}
             <a href="{{ url_for('auth.index') }}">{{ _('Home') }}</a>
-            <a href="{{ url_for('auth.upload') }}">{{ _('Upload') }}</a>
             <a href="{{ url_for('auth.logout') }}">{{ _('Logout') }}</a>
             {% endif %}
             <button id="theme-toggle" onclick="ChangeTheme()">Toggle Theme</button>
@@ -34,6 +33,14 @@
             {% endif %}
             {% endwith %}
             {% block content %}{% endblock %}
+        </div>
+        <div id="file-viewer" class="file-viewer" style="display: none;">
+            <span id="close-file-viewer" class="close-file-viewer" onclick="closeFileViewer()">&times;</span>
+            <div id="file-viewer-content" class="file-viewer-content">
+                <p id="file-viewer-filename" class="file-viewer-filename"></p>
+                <img id="image-viewer-img" class="image-viewer-img" src="static/images/default.gif" alt="">
+                <pre id="text-viewer-content" class="text-viewer-content" style="display: none; text-align: left;"></pre>
+            </div>
         </div>
     </body>
 </html>

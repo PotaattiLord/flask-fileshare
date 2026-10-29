@@ -19,17 +19,28 @@ login = LoginManager(app)
 login.login_view = 'auth.login'
 login.login_message = _l('Please log in to access this page.')
 
+@app.route('/')
+def root():
+    return redirect(url_for('auth.index'))
+
 from app.errors import bp as errors_bp
 app.register_blueprint(errors_bp)
 
 from app.auth import bp as auth_bp
 app.register_blueprint(auth_bp, url_prefix='/auth')
 
+from app.cli import bp as cli_bp
+app.register_blueprint(cli_bp)
+
 from app import models
 
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
+
+    @app.route('/')
+    def root():
+        return redirect(url_for('auth.index'))
 
     db.init_app(app)
     migrate.init_app(app, db)

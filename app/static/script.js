@@ -69,6 +69,36 @@ document.getElementById('fileNameFilter').addEventListener('input', function() {
     });
 });
 
+function showFileViewer(fileUrl) {
+    document.getElementById('image-viewer-img').style.display = 'none';
+    document.getElementById('text-viewer-content').style.display = 'none';
+    document.getElementById('file-viewer-filename').textContent = fileUrl.split('/').pop();
+    if (fileUrl.endsWith('.gif') || fileUrl.endsWith('.jpg') || fileUrl.endsWith('.jpeg') || fileUrl.endsWith('.png')) {
+        document.getElementById('image-viewer-img').src = fileUrl;
+        document.getElementById('image-viewer-img').style.display = 'inline';
+    }
+    else if (fileUrl.endsWith('.txt') || fileUrl.endsWith('.md') || fileUrl.endsWith('.py') || fileUrl.endsWith('.js') || fileUrl.endsWith('.html')) {
+        fetch(fileUrl)
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('text-viewer-content').textContent = data;
+                document.getElementById('text-viewer-content').style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error fetching file:', error);
+                document.getElementById('text-viewer-content').textContent = 'Error loading file.';
+                document.getElementById('text-viewer-content').style.display = 'block';
+            });
+    }
+    document.getElementById('file-viewer').style.display = 'flex';
+}
+
+function closeFileViewer() {
+    document.getElementById('file-viewer').style.display = 'none';
+    document.getElementById('text-viewer-content').style.display = 'none';
+    document.getElementById('image-viewer-img').style.display = 'none';
+}
+
 document.getElementById('downloadSelectedFiles').addEventListener('click', function() {
     var selectedFiles = [];
     fileCheckboxes.forEach(function(checkbox) {

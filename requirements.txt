@@ -7,3 +7,4 @@ flask-login
 flask-babel
 email-validator
 aiosmtpd
+gunicorn

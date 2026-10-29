@@ -6,10 +6,13 @@ import sqlalchemy as sa
 from app import app, db
 from app.auth.forms import LoginForm, RegistrationForm, UploadForm
 from app.auth import bp
-from app.models import User, File
+from app.models import User
 from flask_babel import _
 
 @bp.route('/')
+def root():
+    return redirect(url_for('auth.index'))
+
 @bp.route('/index', methods=['GET', 'POST'])
 @login_required
 def index():
@@ -90,31 +93,9 @@ def logout():
     logout_user()
     return redirect(url_for('auth.index'))
 
-@bp.route('/upload', methods=['GET', 'POST'])
-@login_required
-def upload():
-    if request.method == 'POST':
-        form = UploadForm()
-        if form.validate_on_submit():
-            uploaded_file = request.files['file']
-            if uploaded_file.filename != '':
-                filename = secure_filename(uploaded_file.filename)
-                if form.is_public.data:
-                    file_path = os.path.join(app.config['UPLOAD_FOLDER'], 'public', str(current_user.id), filename)
-                    if not os.path.exists(os.path.dirname(file_path)):
-                        os.makedirs(os.path.dirname(file_path))
-                else:
-                    file_path = os.path.join(app.config['UPLOAD_FOLDER'], 'private', str(current_user.id), filename)
-                    if not os.path.exists(os.path.dirname(file_path)):
-                        os.makedirs(os.path.dirname(file_path))
-                uploaded_file.save(file_path)
-                flash(_('File successfully uploaded'))
-                return redirect(url_for('auth.index'))
-            else:
-                flash(_('No selected file'))
-                return redirect(request.url)
-    form = UploadForm()
-    return render_template('upload.html', title='Upload File', form=form)
+@bp.route('static/<path:filename>')
+def static_file(filename):
+    return send_from_directory('static', filename)
 
 @bp.route("/uploads/public/<path:filename>")
 @login_required
