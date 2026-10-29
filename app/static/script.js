@@ -70,33 +70,47 @@ document.getElementById('fileNameFilter').addEventListener('input', function() {
 });
 
 function showFileViewer(fileUrl) {
-    document.getElementById('image-viewer-img').style.display = 'none';
-    document.getElementById('text-viewer-content').style.display = 'none';
+    document.getElementById('file-viewer-img').style.display = 'none';
+    document.getElementById('file-viewer-text').style.display = 'none';
+    document.getElementById('file-viewer-video').style.display = 'none';
+    document.getElementById('file-viewer-audio').style.display = 'none';
     document.getElementById('file-viewer-filename').textContent = fileUrl.split('/').pop();
     if (fileUrl.endsWith('.gif') || fileUrl.endsWith('.jpg') || fileUrl.endsWith('.jpeg') || fileUrl.endsWith('.png')) {
-        document.getElementById('image-viewer-img').src = fileUrl;
-        document.getElementById('image-viewer-img').style.display = 'inline';
+        document.getElementById('file-viewer-img').src = fileUrl;
+        document.getElementById('file-viewer-img').style.display = 'inline';
     }
     else if (fileUrl.endsWith('.txt') || fileUrl.endsWith('.md') || fileUrl.endsWith('.py') || fileUrl.endsWith('.js') || fileUrl.endsWith('.html')) {
         fetch(fileUrl)
             .then(response => response.text())
             .then(data => {
-                document.getElementById('text-viewer-content').textContent = data;
-                document.getElementById('text-viewer-content').style.display = 'block';
+                document.getElementById('file-viewer-text').textContent = data;
+                document.getElementById('file-viewer-text').style.display = 'block';
             })
             .catch(error => {
                 console.error('Error fetching file:', error);
-                document.getElementById('text-viewer-content').textContent = 'Error loading file.';
-                document.getElementById('text-viewer-content').style.display = 'block';
+                document.getElementById('file-viewer-text').textContent = 'Error loading file.';
+                document.getElementById('file-viewer-text').style.display = 'block';
             });
+    }
+    else if (fileUrl.endsWith('.mp4') || fileUrl.endsWith('.webm') || fileUrl.endsWith('.ogg')) {
+        document.getElementById('file-viewer-video').src = fileUrl;
+        document.getElementById('file-viewer-video').style.display = 'block';
+    }
+    else if (fileUrl.endsWith('.mp3') || fileUrl.endsWith('.wav') || fileUrl.endsWith('.ogg')) {
+        document.getElementById('file-viewer-audio').src = fileUrl;
+        document.getElementById('file-viewer-audio').style.display = 'block';
     }
     document.getElementById('file-viewer').style.display = 'flex';
 }
 
 function closeFileViewer() {
     document.getElementById('file-viewer').style.display = 'none';
-    document.getElementById('text-viewer-content').style.display = 'none';
-    document.getElementById('image-viewer-img').style.display = 'none';
+    document.getElementById('file-viewer-text').style.display = 'none';
+    document.getElementById('file-viewer-video').style.display = 'none';
+    document.getElementById('file-viewer-video').pause();
+    document.getElementById('file-viewer-audio').style.display = 'none';
+    document.getElementById('file-viewer-audio').pause();
+    document.getElementById('file-viewer-img').style.display = 'none';
 }
 
 document.getElementById('downloadSelectedFiles').addEventListener('click', function() {

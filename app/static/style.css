@@ -170,8 +170,8 @@ a:hover {
 #file-viewer-content {
     background-color: rgb(41, 41, 41);
     border-radius: 10px;
-    min-width: 20%;
-    min-height: 20%;
+    min-width: 15%;
+    min-height: 15%;
     max-width: 80%;
     max-height: 80%;
     padding: 10px;
@@ -187,13 +187,13 @@ a:hover {
     top: 10px;
     right: 20px;
 }
-#image-viewer-img {
+#file-viewer-img {
     border-radius: 10px;
     max-width: 100%;
     max-height: 100%;
     margin: 0 auto;
 }
-#text-viewer-content {
+#file-viewer-text {
     display: none;
     background-color: rgb(0, 0, 0, 0.3);
     border-radius: 10px;
