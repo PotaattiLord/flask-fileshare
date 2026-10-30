@@ -204,3 +204,7 @@ a:hover {
     overflow-y: auto;
     max-height: 100%;
 }
+#file-viewer-audio {
+    display: none;
+    min-width: 500px;
+}
