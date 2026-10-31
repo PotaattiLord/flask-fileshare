@@ -118,6 +118,11 @@ body {
     width: 20%;
     height: fit-content;
     float: left;
+    box-sizing: border-box;
+}
+.sidebar input {
+    width: 100%;
+    min-width: 0;
 }
 .files {
     background-color: var(--files-bg);
@@ -207,4 +212,15 @@ a:hover {
 #file-viewer-audio {
     display: none;
     min-width: 500px;
+}
+
+@media (max-width: 700px) {
+    .sidebar {
+        width: 100%;
+        float: none;
+    }
+    .files {
+        width: 100%;
+        float: none;
+    }
 }
