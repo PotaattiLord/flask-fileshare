@@ -75,7 +75,7 @@ function showFileViewer(fileUrl) {
     document.getElementById('file-viewer-video').style.display = 'none';
     document.getElementById('file-viewer-audio').style.display = 'none';
     document.getElementById('file-viewer-filename').textContent = fileUrl.split('/').pop();
-    if (fileUrl.endsWith('.gif') || fileUrl.endsWith('.jpg') || fileUrl.endsWith('.jpeg') || fileUrl.endsWith('.png')) {
+    if (fileUrl.endsWith('.gif') || fileUrl.endsWith('.jpg') || fileUrl.endsWith('.jpeg') || fileUrl.endsWith('.png') || fileUrl.endsWith('.ico')) {
         document.getElementById('file-viewer-img').src = fileUrl;
         document.getElementById('file-viewer-img').style.display = 'inline';
     }

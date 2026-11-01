@@ -1,0 +1,16 @@
+<div id="file-viewer" class="file-viewer" style="display: none;">
+    <span id="close-file-viewer" class="close-file-viewer" onclick="closeFileViewer()">&times;</span>
+    <div id="file-viewer-content" class="file-viewer-content">
+        <p id="file-viewer-filename" class="file-viewer-filename"></p>
+        <img id="file-viewer-img" class="file-viewer-img" src="static/images/default.gif" alt="">
+        <video id="file-viewer-video" class="file-viewer-video" controls>
+            <source id="video-viewer-source" src="" type="">
+            Your browser does not support the video tag.
+        </video>
+        <audio id="file-viewer-audio" class="file-viewer-audio" controls>
+            <source id="audio-viewer-source" src="" type="">
+            Your browser does not support the audio element.
+        </audio>
+        <pre id="file-viewer-text" class="file-viewer-text" style="display: none; text-align: left;"></pre>
+    </div>
+</div>
