@@ -34,7 +34,7 @@ def index():
             owner_id = int(relative_path.split(os.sep, 1)[0])
             owner = db.session.get(User, owner_id)
             public_files.append({'path': relative_path, 'name': file_name, 'owner': owner})
-    
+
     if request.method == 'POST':
         form = UploadForm()
         if form.validate_on_submit():
@@ -101,6 +101,8 @@ def static_file(filename):
 @login_required
 def public_file(filename):
     public_root = os.path.join(app.config["UPLOAD_FOLDER"], "public")
+    if not os.path.exists(os.path.join(public_root, filename)):
+        abort(404)
     return send_from_directory(public_root, filename)
 
 
@@ -111,7 +113,10 @@ def private_file(user_id, filename):
         abort(403)
 
     private_root = os.path.join(app.config['UPLOAD_FOLDER'], 'private', str(user_id))
+    if not os.path.exists(os.path.join(private_root, filename)):
+        abort(404)
     return send_from_directory(private_root, filename)
+
 
 @bp.route('/delete/<string:access>/<int:user_id>/<path:filename>', methods=['POST'])
 @login_required

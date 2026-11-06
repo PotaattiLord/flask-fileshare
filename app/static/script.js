@@ -69,6 +69,12 @@ document.getElementById('fileNameFilter').addEventListener('input', function() {
     });
 });
 
+if (document.getElementById('private-files').children.length === 0 && document.getElementById('public-files').children.length === 0) {
+    document.getElementById('no-files-message').style.display = 'block';
+} else {
+    document.getElementById('no-files-message').style.display = 'none';
+}
+
 function showFileViewer(fileUrl) {
     document.getElementById('file-viewer-img').style.display = 'none';
     document.getElementById('file-viewer-text').style.display = 'none';

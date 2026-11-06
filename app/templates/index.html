@@ -43,7 +43,8 @@
         </div>
     </div>
     <div id="files" class="files">
-        <div class="file-list private-files">
+        <p id="no-files-message" style="display: none;">{{ _('No files available.') }}</p>
+        <div id="private-files" class="file-list private-files">
             <h3>{{ _('Private Files') }}</h3>
             {% for file in files %}
             <div class="file-item">
@@ -64,7 +65,7 @@
             {% endfor %}
         </div>
         {% if public_files %}
-        <div class="file-list public-files">
+        <div id="public-files" class="file-list public-files">
             <h3>{{ _('Public Files') }}</h3>
             {% for file in public_files %}
             <div class="file-item">
